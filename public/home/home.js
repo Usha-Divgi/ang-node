@@ -1,4 +1,4 @@
-angular.module('home', ['ui.router'])
+angular.module('home', ['ui.router','ui.bootstrap'])
  .controller('homeCtrl', homeCtrl)
 	 .config(function homeConfig($stateProvider) {
 		$stateProvider
@@ -43,7 +43,33 @@ function homeCtrl($scope, $http, Reminder){
 		}, function (response) {
 			console.log(response);
 		});
-
 	};
+
+	vm.edit = function(event) {
+		vm.eventToEdit = event;
+	};
+
+	function disabled(data) {
+    var date = data.date,
+      mode = data.mode;
+    return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
+  }
+
+	$scope.dateOptions = {
+    dateDisabled: disabled,
+    formatYear: 'yy',
+    maxDate: new Date(2020, 5, 22),
+    minDate: new Date(),
+    startingDay: 1
+  };
+
+  $scope.open1 = function() {
+    $scope.popup1.opened = true;
+  };
+
+  $scope.popup1 = {
+    opened: false
+  };
+
 	
 };

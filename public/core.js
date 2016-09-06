@@ -1,4 +1,4 @@
-var app = angular.module('routerApp', ['home']);
+var app = angular.module('routerApp', ['home','ui.bootstrap']);
 
 app.config(function( $urlRouterProvider, $urlMatcherFactoryProvider, $locationProvider ){
 	 $urlMatcherFactoryProvider.strictMode(false);
