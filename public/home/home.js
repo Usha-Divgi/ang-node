@@ -17,10 +17,37 @@ angular.module('home', ['ui.router','ui.bootstrap'])
 // .service('homeService', homeService)
 // ;
 
-function homeCtrl($scope, $http, Reminder){
-	console.log(Reminder);
+function homeCtrl($scope, $http, Reminder, socket){
 	var vm = this;
 	vm.list = Reminder.data;
+	/*socket.on('notification', function(data) {
+		alert('something');
+		console.log(data)
+	     vm.socketInfo = data;
+	     console.log( vm.socketInfo);
+
+  	});*/
+
+  	/*socket.on('notification', function (data) {
+  		alert('something');
+    $scope.name = data.name;
+    $scope.users = data.users;
+  });*/
+
+	/*$scope.$on('$destroy', function (event) {
+        socket.removeAllListeners();
+        // or something like
+        // socket.removeListener(this);
+    });*/
+
+     socket.emit('add-customer', $scope.currentCustomer);
+
+     socket.on('notification', function(data) {
+     	console.log(data);
+    $scope.$apply(function () {
+      $scope.newCustomers.push(data.customer);
+    });
+  });
 
 	vm.save = function() {
 		var data = {"event": vm.reminder.event, "time": new Date()};
