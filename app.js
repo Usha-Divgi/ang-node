@@ -29,6 +29,8 @@ io.on('connection', function(socket) {
   });
 });
 
+console.log("working");
+
  
 var routes = require("./routes/routes.js")(app);
  
